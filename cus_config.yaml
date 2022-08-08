@@ -15,8 +15,8 @@ plugins:
   - tag: mem_cache
     type: cache
     args:
-      size: 1024
-      lazy_cache_ttl: 17200
+      size: 512000
+      lazy_cache_ttl: 259200
   
   # 修改应答 ttl
   - tag: 'modify_ttl'
@@ -56,7 +56,7 @@ plugins:
     type: fast_forward
     args:
       upstream:
-        - addr: "192.168.1.1:53"
+        - addr: "192.168.50.252:53"
 
   # google dns
   - tag: google
@@ -129,7 +129,7 @@ plugins:
     type: query_matcher
     args:
       domain:
-        - 'provider:geosite:cn,apple-cn,steam@cn'        
+        - 'provider:geosite:cn,apple-cn'        
 
   # 匹配非本地域名的插件
   - tag: query_is_non_local_domain
