@@ -15,8 +15,8 @@ plugins:
   - tag: mem_cache
     type: cache
     args:
-      size: 512000
-      lazy_cache_ttl: 259200
+      size: 1024
+      lazy_cache_ttl: 17200
   
   # 修改应答 ttl
   - tag: 'modify_ttl'
@@ -51,6 +51,14 @@ plugins:
           dial_addr: "1.12.12.12"
           trusted: true           
 
+  # 本地 dns 备用
+  - tag: localdns
+    type: fast_forward
+    args:
+      upstream:
+        - addr: "202.102.152.3"
+        - addr: "202.102.154.3"
+
   # google dns
   - tag: google
     type: fast_forward
@@ -74,6 +82,17 @@ plugins:
         - addr: "tls://cloudflare-dns.com" 
           dial_addr: "1.0.0.1"
           trusted: true 
+          
+  # doq 备用
+  - tag: adguard
+    type: forward
+    args:
+      upstream:
+        - addr: "quic://dns-unfiltered.adguard" # 服务器地址
+          ip_addr: # 手动指定服务器的 IP 地址 可以配置多个
+            - "94.140.14.140"
+            - "94.140.14.141"
+          trusted: true # 是否是可信服务器
 
   # local 序列
   - tag: forward_local
